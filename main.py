@@ -25,10 +25,10 @@ while len(guessed_states) < len(all_states):
     answer_state = screen.textinput(title=f"Guess the State {len(guessed_states)}/{len(all_states)}", prompt="What's another state's name?")
 
     if answer_state is None:
-        missing_states = []
-        for state in all_states:
-            if state not in guessed_states:
-                missing_states.append(state)
+        missing_states = [state for state in all_states if state not in guessed_states]
+        # for state in all_states:
+        #     if state not in guessed_states:
+        #         missing_states.append(state)
         new_data = pd.DataFrame(missing_states)
         new_data.to_csv("missing_states.csv")
         break
@@ -43,3 +43,5 @@ while len(guessed_states) < len(all_states):
         t.write(answer_state, font=FONT)
     else:
         print("not found")
+
+
